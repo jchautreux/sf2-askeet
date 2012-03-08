@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * 
  * @ORM\Entity(repositoryClass="Presta\AskeetBundle\Repository\AnswerRepository")
  * @ORM\Table(name="answer")
+ * @ORM\HasLifecycleCallbacks()
  * 
  * @author	Jean-Christophe HAUTREUX <jchautreux@prestaconcept.net>
  * @package package_name
@@ -38,11 +39,14 @@ class Answer
 	
 	/**
 	 * @ORM\Column(type="string", length=100, nullable=true)
+	 * 
+	 * @Assert\NotBlank()
 	 */
 	protected $authorName;
 	
 	/**
 	 * @ORM\Column(type="datetime")
+	 * 
 	 */
 	protected $createdDate;
 	
@@ -160,5 +164,13 @@ class Answer
     public function getAuthorName()
     {
         return $this->authorName;
+    }
+    
+    /**
+    * @ORM\prePersist
+    */
+    public function setCreatedDateValue()
+    {
+    	$this->createdDate = new \DateTime();
     }
 }
