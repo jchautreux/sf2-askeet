@@ -17,7 +17,8 @@ class QuestionRepository extends EntityRepository
 		$query = $this->getEntityManager()
 		->createQuery('
 	            SELECT q, u FROM PrestaAskeetBundle:Question q
-	            JOIN q.user u'
+	            JOIN q.user u
+	            ORDER BY q.createdDate DESC'
 		);
 	
 		try {
@@ -33,8 +34,9 @@ class QuestionRepository extends EntityRepository
 	        ->createQuery('
 	            SELECT q, u, a FROM PrestaAskeetBundle:Question q
 	            JOIN q.user u
-	            JOIN q.answers a
-	            WHERE q.id = :id'
+	            LEFT JOIN q.answers a
+	            WHERE q.id = :id
+	            ORDER BY a.createdDate DESC'
 	        )->setParameter('id', $id);
 	
 	    try {

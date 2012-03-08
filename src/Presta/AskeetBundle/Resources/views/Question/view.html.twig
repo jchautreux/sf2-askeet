@@ -1,0 +1,23 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+	<h1>{{ question.title }}</h1>
+	<h2 style="font-size:inherit; margin:0px;">{{ question.user.username }}</h2>
+	
+	<p style="border-bottom:1px solid #000; margin:0px 0px 5px; padding:0px 0px 5px 0px;">{{ question.content }}</p>
+	
+	<dl style="padding-left:20px;">
+		{% for answer in question.answers %}
+			<dt style="margin:0px;">{{ answer.authorName }} répond :</dt>
+			<dd style="border-bottom:1px solid #000; margin:0px 0px 5px; padding:0px 0px 5px 20px;">
+				<h3 style="font-size:inherit; margin:0px;">{{ answer.title }}</h3>
+				<p style="font-size:inherit; margin:0px;">{{ answer.content }}</p>
+				<p style="margin:0px; text-align:right;">le {{ answer.createdDate|date("d/m/Y à H:i:s") }}</p>
+			</dd>
+		{% else %}	
+			<dt style="margin:0px;">Aucune réponse</dt>
+		{% endfor %}
+	</dl>
+	
+	<a style="border-radius:3px; border:1px solid #666; color:#000; padding:0px 5px; text-decoration:none;" href="{{ path('answer_new', {'id_question': question.id}) }}">Répondre</a>
+{% endblock %}

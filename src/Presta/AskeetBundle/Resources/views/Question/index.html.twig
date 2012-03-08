@@ -1,1 +1,22 @@
-Hello {{ name }}!
+{% extends '::base.html.twig' %}
+
+{% block body %}
+	<h1>Liste des questions</h1>
+	
+	{% if successMsg %}
+		<p class="success-msg">Votre question a bien été créé</p>
+	{% endif %}
+	
+	<dl>
+		{% for question in questions %}
+			<dt style="margin:0px;">{{ question.user.username }} demande :</dt>
+			<dd style="border-bottom:1px solid #000; margin:0px 0px 5px; padding:0px 0px 5px 20px;">
+				<h2 style="font-size:inherit; margin:0px;">{{ question.title }}</h2>
+				<p style="margin:0px; text-align:right;">le {{ question.createdDate|date("d/m/Y à H:i:s") }}</p>
+				<a style="border-radius:3px; border:1px solid #666; color:#000; padding:0px 5px; text-decoration:none;" href="{{ path('question_view', {'id': question.id}) }}">Voir la question</a>
+			</dd>
+		{% endfor %}
+	</dl>
+	
+	<a href="{{ path('question_new') }}">Ajouter une nouvelle question</a>
+{% endblock %}

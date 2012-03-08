@@ -13,6 +13,19 @@ question_create:
 question_view:
   pattern:  /question/{id}/view.html
   defaults: { _controller: PrestaAskeetBundle:Question:view }
+  
+  
+answer_new:
+  pattern:  /answer/{id_question}
+  defaults: { _controller: PrestaAskeetBundle:Answer:new }
+  requirements:
+    _method:  GET
+  
+answer_create:
+  pattern:  /answer/{id_question}
+  defaults: { _controller: PrestaAskeetBundle:Answer:new }
+  requirements:
+    _method:  POST
     
     
   

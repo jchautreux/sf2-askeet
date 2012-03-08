@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * 
  * @ORM\Entity(repositoryClass="Presta\AskeetBundle\Repository\QuestionRepository")
  * @ORM\Table(name="question")
+ * @ORM\HasLifecycleCallbacks()
  * 
  * @author	Jean-Christophe HAUTREUX <jchautreux@prestaconcept.net>
  * @package package_name
@@ -189,5 +190,13 @@ class Question
     public function getAnswers()
     {
         return $this->answers;
+    }
+    
+    /**
+    * @ORM\prePersist
+    */
+    public function setCreatedDateValue()
+    {
+    	$this->createdDate = new \DateTime();
     }
 }
