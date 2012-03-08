@@ -1,3 +1,33 @@
-PrestaAskeetBundle_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: PrestaAskeetBundle:Default:index }
+question_new:
+  pattern:  /question
+  defaults: { _controller: PrestaAskeetBundle:Question:new }
+  requirements:
+    _method:  GET
+  
+question_create:
+  pattern:  /question
+  defaults: { _controller: PrestaAskeetBundle:Question:new }
+  requirements:
+    _method:  POST
+  
+question_view:
+  pattern:  /question/{id}/view.html
+  defaults: { _controller: PrestaAskeetBundle:Question:view }
+    
+    
+  
+user_new:
+  pattern:  /user
+  defaults: { _controller: PrestaAskeetBundle:User:new }
+  requirements:
+    _method:  GET
+  
+user_create:
+  pattern:  /user
+  defaults: { _controller: PrestaAskeetBundle:User:new }
+  requirements:
+    _method:  POST
+  
+user_success:
+  pattern:  /user/success
+  defaults: { _controller: PrestaAskeetBundle:User:success }
