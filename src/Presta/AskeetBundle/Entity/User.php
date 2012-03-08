@@ -3,12 +3,15 @@
 namespace Presta\AskeetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * 
  * 
  * @ORM\Entity(repositoryClass="Presta\AskeetBundle\Repository\UserRepository")
  * @ORM\Table(name="user")
+ * @UniqueEntity("username")
  * 
  * @author	Jean-Christophe HAUTREUX <jchautreux@prestaconcept.net>
  * @package package_name
@@ -24,12 +27,16 @@ class User
 	protected $id;
 	
 	/**
-	 * @ORM\Column(type="string", length=100)
+	 * @ORM\Column(type="string", length=100), unique=true)
+     *  
+	 * @Assert\NotBlank()
 	 */
-	protected $login;
+	protected $username;
 	
 	/**
 	 * @ORM\Column(type="string", length=100)
+	 * 
+	 * @Assert\NotBlank()
 	 */
 	protected $password;
 	
@@ -56,23 +63,23 @@ class User
     }
 
     /**
-     * Set login
+     * Set username
      *
-     * @param string $login
+     * @param string $username
      */
-    public function setLogin($login)
+    public function setUsername($username)
     {
-        $this->login = $login;
+        $this->username = $username;
     }
 
     /**
-     * Get login
+     * Get username
      *
      * @return string 
      */
-    public function getLogin()
+    public function getUsername()
     {
-        return $this->login;
+        return $this->username;
     }
 
     /**

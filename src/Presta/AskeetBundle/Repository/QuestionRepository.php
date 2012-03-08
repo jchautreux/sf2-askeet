@@ -12,4 +12,36 @@ use Doctrine\ORM\EntityRepository;
  */
 class QuestionRepository extends EntityRepository
 {
+	public function findAllJoinedToUser()
+	{
+		$query = $this->getEntityManager()
+		->createQuery('
+	            SELECT q, u FROM PrestaAskeetBundle:Question q
+	            JOIN q.user u'
+		);
+	
+		try {
+			return $query->getResult();
+		} catch (\Doctrine\ORM\NoResultException $e) {
+			return null;
+		}
+	}
+	
+	public function findOneByIdJoinedToOther($id)
+	{
+	    $query = $this->getEntityManager()
+	        ->createQuery('
+	            SELECT q, u, a FROM PrestaAskeetBundle:Question q
+	            JOIN q.user u
+	            JOIN q.answers a
+	            WHERE q.id = :id'
+	        )->setParameter('id', $id);
+	
+	    try {
+	        return $query->getSingleResult();
+	    } catch (\Doctrine\ORM\NoResultException $e) {
+	        return null;
+	    }
+	}
+	
 }

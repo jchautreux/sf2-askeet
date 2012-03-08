@@ -3,6 +3,7 @@
 namespace Presta\AskeetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * 
@@ -25,11 +26,15 @@ class Question
 	
 	/**
 	 * @ORM\Column(type="string", length=100)
+	 * 
+	 * @Assert\NotBlank()
 	 */
 	protected $title;
 	
 	/**
 	 * @ORM\Column(type="text")
+	 * 
+	 * @Assert\NotBlank()
 	 */
 	protected $content;
 	
