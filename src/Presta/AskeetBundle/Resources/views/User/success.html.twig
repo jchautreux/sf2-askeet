@@ -1,3 +1,7 @@
-<p>Merci de votre inscription</p>
+{% extends '::base.html.twig' %}
 
-<a href="{{ path('homepage') }}">retourner à la liste des questions</a>
+{% block body %}
+	<p>Merci de votre inscription</p>
+	
+	<a href="{{ path('homepage') }}">retourner à la liste des questions</a>
+{% endblock %}
